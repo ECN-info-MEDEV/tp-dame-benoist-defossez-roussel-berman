@@ -33,15 +33,17 @@ public class Echiquier {
     public Echiquier() {
         int nbrpions = 0;
         this.plateau = new Pion[10][10];
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
-                if (i + j % 2 == 0) {
-                    if (nbrpions < 20) {
-                        nbrpions++;
+                if (((i+j) % 2) == 0) {
                         this.plateau[i][j] = new Pion(false);
-                    } else {
-                        this.plateau[i][j] = new Pion(true);
-                    }
+                }
+            }
+        }
+        for(int i=9 ; i>5; i-- ){
+            for(int j=0 ; j < 10; j++ ){
+                if (((i+j) % 2) == 0) {
+                    this.plateau[i][j] = new Pion(true);
                 }
             }
         }
@@ -104,12 +106,7 @@ public class Echiquier {
         return pionEaten;
         }
 
-    
-
-    
-    
-    
-    private void affichePlateau() {
+    public void affichePlateau() {
         String line = "";
         int largeur = 10; // Plateau carré de 10 x 10
         int hauteur = 10;
@@ -124,12 +121,17 @@ public class Echiquier {
                 if (i == 0 || i == largeur) {
                     line = line + "|";
                 }
-
-                if (plateau[i][j].isWhite()) {
+                
+                if(plateau[i][j] == null){
+                    line = line + "" + " " + "|";
+                }else{
+                   if (plateau[i][j].isWhite()) {
                     line = line + "" + "◎" + "|";
-                } else {
-                    line = line + "" + "◉" + "|";
+                    } else {
+                        line = line + "" + "◉" + "|";
+                    } 
                 }
+                
             }
             System.out.println(line);
             line = "";

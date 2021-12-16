@@ -12,12 +12,18 @@ package ds.jeudame;
 public class Main {
     public static void main(String[] args){
         Echiquier echiquier = new Echiquier();
-        Joueur joueur1= new Joueur(true);
-        Joueur joueur2= new Joueur(false);
+
+        System.out.println("\nJOUEUR 1\n");
+        Joueur joueur1 = new Joueur(true);
+        System.out.println("\nJOUEUR 2\n");
+        Joueur joueur2 = new Joueur(false);
+        
         boolean victoire=false;
         int n=0;
         boolean manger = false;
+        
         while(!victoire){
+            echiquier.affichePlateau();
             if(n%2==0){
                 manger=joueur1.tourDeJeu(echiquier);
                 n=1;
@@ -32,17 +38,17 @@ public class Main {
                 if (manger==true){
                     manger=false;
                     joueur1.setNbrPion(joueur1.getNbrPion()-1);
-            }
-            
-            //n=n%2+1;
-            if(joueur1.getNbrPion()==0){
-                System.out.println(joueur2.getNom()+" a gagné!!");
-                victoire = true;
-            }
-            if(joueur2.getNbrPion()==0){
-                System.out.println(joueur1.getNom()+" a gagné!!");
-                victoire = true;
-            }
+                }
+
+                //n=n%2+1;
+                if(joueur1.getNbrPion()==0){
+                    System.out.println(joueur2.getNom()+" a gagné!!");
+                    victoire = true;
+                }
+                if(joueur2.getNbrPion()==0){
+                    System.out.println(joueur1.getNom()+" a gagné!!");
+                    victoire = true;
+                }
             }
         }
     }

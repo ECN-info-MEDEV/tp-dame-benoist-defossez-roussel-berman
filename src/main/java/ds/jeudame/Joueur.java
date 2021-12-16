@@ -34,6 +34,7 @@ public class Joueur {
     }
 
     public Joueur(boolean isWhite) {
+        scanner = new Scanner(System.in);
         System.out.println("[ENTRÉE]" + " Tapez votre pseudo :");
         String nomJoueur = scanner.next();
         this.nom = nomJoueur;
