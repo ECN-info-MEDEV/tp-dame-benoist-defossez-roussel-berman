@@ -11,6 +11,10 @@ package ds.jeudame;
  */
 public class Pion {
     private boolean white;
+    
+    public Pion(boolean couleur) {
+        this.white = couleur;
+    }
 
     public boolean isWhite() {
         return white;
