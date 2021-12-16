@@ -13,6 +13,10 @@ public class Echiquier {
 
     private Pion[][] plateau;
     
+    public Pion[][] getPlateau() {
+        return plateau;
+    }
+    
     // Codes couleur pour l'affichage console
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -40,7 +44,25 @@ public class Echiquier {
             }
         }
     }
+    public boolean deplacerPion(int xCurrent, int yCurrent, int xNew, int yNew){
+        boolean pionEaten = false;
+        if(Math.abs(xNew - xCurrent)==1){
+            this.getPlateau()[xNew][yNew] = this.getPlateau()[xCurrent][yCurrent];
+            this.getPlateau()[xCurrent][yCurrent] = null;
+        }else{
+            this.getPlateau()[xNew][yNew] = this.getPlateau()[xCurrent][yCurrent];
+            this.getPlateau()[xCurrent][yCurrent] = null;
+            this.getPlateau()[(xCurrent + xNew / 2)][(yCurrent + yNew / 2)] = null;
+            pionEaten = true;   
+        }
+        return pionEaten;
+        }
 
+    
+
+    
+    
+    
     private void affichePlateau() {
         String line = "";
         int largeur = 10; // Plateau carré de 10 x 10
