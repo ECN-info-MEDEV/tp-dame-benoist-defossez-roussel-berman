@@ -23,6 +23,23 @@ public class Echiquier {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    
+    public Echiquier() {
+        int nbrpions = 0;
+        this.plateau = new Pion[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (i + j % 2 == 0) {
+                    if (nbrpions < 20) {
+                        nbrpions++;
+                        this.plateau[i][j] = new Pion(false);
+                    } else {
+                        this.plateau[i][j] = new Pion(true);
+                    }
+                }
+            }
+        }
+    }
 
     private void affichePlateau() {
         String line = "";
