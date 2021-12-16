@@ -33,14 +33,17 @@ public class Main {
                     manger=false;
                     joueur1.setNbrPion(joueur1.getNbrPion()-1);
             }
-            victoire=echiquier.victoire();
+            
             //n=n%2+1;
             if(joueur1.getNbrPion()==0){
                 System.out.println(joueur2.getNom()+" a gagné!!");
+                victoire = true;
             }
             if(joueur2.getNbrPion()==0){
                 System.out.println(joueur1.getNom()+" a gagné!!");
+                victoire = true;
             }
             }
+        }
     }
 }

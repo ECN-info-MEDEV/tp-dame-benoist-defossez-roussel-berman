@@ -15,6 +15,10 @@ public class Echiquier {
 
     private Pion[][] plateau;
     
+    public Pion[][] getPlateau() {
+        return plateau;
+    }
+    
     // Codes couleur pour l'affichage console
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -25,7 +29,6 @@ public class Echiquier {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    private Pion [][] plateau;
 
     public Echiquier() {
         int nbrpions = 0;
@@ -44,7 +47,7 @@ public class Echiquier {
         }
     }
     
-    public boolean deplacementAutotrise(int x1, int y1, int x2, int y2, boolean couleur) {
+    public boolean deplacementAutorise(int x1, int y1, int x2, int y2, boolean couleur) {
         //verifie que les coordonnées sont comprises entre 0 et 9
         if ( x1<0 | x1>9 | x2<0 | x2>9 | y1<0 | y1>9 | y2<0 | y2>9  ) {
             return false;
@@ -56,7 +59,7 @@ public class Echiquier {
         }
         
         //verifie la bonne couleur du pion à déplacer
-        if ( this.plateau[x1][y1].getCouleur() ^ couleur ){
+        if ( this.plateau[x1][y1].isWhite() ^ couleur ){
             return false;
         }
         
@@ -68,7 +71,7 @@ public class Echiquier {
             }
             //cas déplacement avec prise de pion
             if (y2 == y1+2) {
-                return (2==abs(x1-x2) & this.plateau[(x1+x2)/2][(y1+y2)/2].getCouleur());
+                return (2==abs(x1-x2) & this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
             }
         }
         
@@ -80,14 +83,32 @@ public class Echiquier {
             }
             //cas déplacement avec prise de pion
             if (y1 == y2+2) {
-                return (2==abs(x1-x2) & !this.plateau[(x1+x2)/2][(y1+y2)/2].getCouleur());
+                return (2==abs(x1-x2) & !this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
             }
         }        
         return false;
         
     }
 
+    public boolean deplacerPion(int xCurrent, int yCurrent, int xNew, int yNew){
+        boolean pionEaten = false;
+        if(Math.abs(xNew - xCurrent)==1){
+            this.getPlateau()[xNew][yNew] = this.getPlateau()[xCurrent][yCurrent];
+            this.getPlateau()[xCurrent][yCurrent] = null;
+        }else{
+            this.getPlateau()[xNew][yNew] = this.getPlateau()[xCurrent][yCurrent];
+            this.getPlateau()[xCurrent][yCurrent] = null;
+            this.getPlateau()[(xCurrent + xNew / 2)][(yCurrent + yNew / 2)] = null;
+            pionEaten = true;   
+        }
+        return pionEaten;
+        }
 
+    
+
+    
+    
+    
     private void affichePlateau() {
         String line = "";
         int largeur = 10; // Plateau carré de 10 x 10
