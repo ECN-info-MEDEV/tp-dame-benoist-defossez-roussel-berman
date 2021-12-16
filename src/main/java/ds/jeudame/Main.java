@@ -36,10 +36,10 @@ public class Main {
             victoire=echiquier.victoire();
             //n=n%2+1;
             if(joueur1.getNbrPion()==0){
-                System.out.println(Joueur2.getNom()+" a gagné!!");
+                System.out.println(joueur2.getNom()+" a gagné!!");
             }
             if(joueur2.getNbrPion()==0){
-                System.out.println(Joueur1.getNom()+" a gagné!!");
+                System.out.println(joueur1.getNom()+" a gagné!!");
             }
             }
     }
