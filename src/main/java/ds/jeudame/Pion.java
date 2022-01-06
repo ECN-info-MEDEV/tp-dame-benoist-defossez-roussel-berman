@@ -11,9 +11,11 @@ package ds.jeudame;
  */
 public class Pion {
     private boolean white;
+    private boolean dame;
     
     public Pion(boolean couleur) {
         this.white = couleur;
+        this.dame = false;
     }
 
     public boolean isWhite() {
@@ -23,4 +25,13 @@ public class Pion {
     public void setWhite(boolean white) {
         this.white = white;
     }
+
+    public boolean isDame() {
+        return dame;
+    }
+
+    public void setDame(boolean dame) {
+        this.dame = dame;
+    }
+    
 }

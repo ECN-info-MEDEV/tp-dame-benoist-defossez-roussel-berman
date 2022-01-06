@@ -31,7 +31,6 @@ public class Echiquier {
     public static final String ANSI_WHITE = "\u001B[37m";
 
     public Echiquier() {
-        int nbrpions = 0;
         this.plateau = new Pion[10][10];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
@@ -67,37 +66,44 @@ public class Echiquier {
             System.out.println("mauvaise couleur");
             return false;
         }
-        
-        //cas des noirs
-        if (!couleur) {
-            //cas déplacement simple
-            if (y2 == y1+1) {
-                System.out.println("deplacement simple");
-                return (1 == abs(x1-x2));   
-            }
-            //cas déplacement avec prise de pion
-            if (y2 == y1+2) {
-                System.out.println("prise");
-                return (2==abs(x1-x2) && this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
-            }
+        if (this.plateau[x1][y1].isDame()){
+            // cas d'une dame
+            // à faire
         }
-        
-        //cas des blancs
-        if (couleur) {
-            //cas déplacement simple
-            if (y1 == y2+1) {
-                System.out.println("deplacement simple");
-                return (1 == abs(x1-x2));   
+        else {
+            // cas d'un pion
+            
+            //cas des noirs
+            if (!couleur) {
+                //cas déplacement simple
+                if (y2 == y1+1) {
+                    System.out.println("deplacement simple");
+                    return (1 == abs(x1-x2));   
+                }
+                //cas déplacement avec prise de pion
+                if (y2 == y1+2) {
+                    System.out.println("prise");
+                    return (2==abs(x1-x2) && this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
+                }
             }
-            //cas déplacement avec prise de pion
-            if (y1 == y2+2) {
-                System.out.println("prise");
-                return (2==abs(x1-x2) && !this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
-            }
-        }     
-        System.out.println("autre");
-        return false;
-        
+
+            //cas des blancs
+            if (couleur) {
+                //cas déplacement simple
+                if (y1 == y2+1) {
+                    System.out.println("deplacement simple");
+                    return (1 == abs(x1-x2));   
+                }
+                //cas déplacement avec prise de pion
+                if (y1 == y2+2) {
+                    System.out.println("prise");
+                    return (2==abs(x1-x2) && !this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
+                }
+            }     
+            System.out.println("autre");
+            return false;
+        }
+        return false; //on arrive jamais ici
     }
 
     public boolean deplacerPion(int xCurrent, int yCurrent, int xNew, int yNew){
@@ -108,8 +114,14 @@ public class Echiquier {
         }else{
             this.getPlateau()[xNew][yNew] = this.getPlateau()[xCurrent][yCurrent];
             this.getPlateau()[xCurrent][yCurrent] = null;
-            this.getPlateau()[(xCurrent + xNew / 2)][(yCurrent + yNew / 2)] = null;
+            this.getPlateau()[(xCurrent + xNew) / 2][(yCurrent + yNew) / 2] = null;
             pionEaten = true;   
+        }
+        if (yNew==0 && this.plateau[xNew][yNew].isWhite()) {
+            this.plateau[xNew][yNew].setDame(true);
+        }
+        if (yNew==9 && !this.plateau[xNew][yNew].isWhite()) {
+            this.plateau[xNew][yNew].setDame(true);
         }
         return pionEaten;
         }
@@ -119,15 +131,11 @@ public class Echiquier {
 
         int largeur = 10; // Plateau carré de 10 x 10
         int hauteur = 10;
-        for (int i = 0; i < largeur * 3 + 1; i++) {
-            bld.append("=");
-        }
-        String line = bld.toString();
-        System.out.println(line);
+
+        String line;
+        System.out.println("==========================");
         System.out.println("   0 1 2 3 4 5 6 7 8 9");
         
-        
-
         for (int j = 0; j < hauteur; j++) {
             bld = new StringBuilder();
             for (int i = 0; i < largeur; i++) {
@@ -139,12 +147,21 @@ public class Echiquier {
                 if(plateau[i][j] == null){
                     bld.append(" |");
                 }else{
-                   if (plateau[i][j].isWhite()) {                    
-                    //bld.append("◎|");
-                    bld.append("b|");
+                   if (plateau[i][j].isWhite()) {
+                       if (plateau[i][j].isDame()) {
+                           bld.append("B|");
+                       } else {
+                           //bld.append("◎|");
+                            bld.append("b|");
+                       }
                     } else {
-                        //bld.append("◉|");
-                        bld.append("n|");
+                       if (plateau[i][j].isDame()) {
+                           bld.append("N|");
+                       } else {
+                           //bld.append("◉|");
+                           bld.append("n|");
+                       }
+                        
                     } 
                 }
                 
@@ -152,18 +169,7 @@ public class Echiquier {
             
             line = bld.toString();
             System.out.println(line);
-            /*
-            bld = new StringBuilder();
-            for (int i = 0; i < largeur * 3 + 1; i++) {
-                if (j == hauteur - 1) {
-                    bld.append("=");
-                } else {
-                    bld.append("-");
-                }
-            }
-            line = bld.toString();
-            System.out.println(line);
-            */
         }
+        System.out.println("==========================");
     }
 }
