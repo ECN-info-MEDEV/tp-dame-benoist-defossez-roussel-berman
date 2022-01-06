@@ -124,6 +124,7 @@ public class Echiquier {
         }
         String line = bld.toString();
         System.out.println(line);
+        System.out.println("   0 1 2 3 4 5 6 7 8 9");
         
         
 
@@ -131,7 +132,8 @@ public class Echiquier {
             bld = new StringBuilder();
             for (int i = 0; i < largeur; i++) {
                 if (i == 0) {
-                    bld.append("|");
+                    bld.append(j);
+                    bld.append(" |");
                 }
                 
                 if(plateau[i][j] == null){
@@ -147,9 +149,10 @@ public class Echiquier {
                 }
                 
             }
+            
             line = bld.toString();
             System.out.println(line);
-            
+            /*
             bld = new StringBuilder();
             for (int i = 0; i < largeur * 3 + 1; i++) {
                 if (j == hauteur - 1) {
@@ -160,6 +163,7 @@ public class Echiquier {
             }
             line = bld.toString();
             System.out.println(line);
+            */
         }
     }
 }

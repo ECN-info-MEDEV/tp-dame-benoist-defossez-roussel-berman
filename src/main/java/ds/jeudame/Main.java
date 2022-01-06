@@ -23,8 +23,10 @@ public class Main {
         boolean manger = false;
         
         while(!victoire){
-            echiquier.affichePlateau();
+            
             if(n%2==0){
+                echiquier.affichePlateau();
+                System.out.prinln("à " + joueur1.getNom() " de jouer! Tu es BLANC");
                 manger=joueur1.tourDeJeu(echiquier);
                 n=1;
                 if (manger){
@@ -33,6 +35,7 @@ public class Main {
             }
             else{
                 echiquier.affichePlateau();
+                System.out.prinln("à " + joueur2.getNom() " de jouer! Tu es NOIR")
                 manger=joueur2.tourDeJeu(echiquier);
                 n=0;
                 if (manger){
