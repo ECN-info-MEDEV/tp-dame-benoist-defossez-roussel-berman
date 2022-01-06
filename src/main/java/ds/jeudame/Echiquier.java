@@ -36,14 +36,14 @@ public class Echiquier {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 10; j++) {
                 if (((i+j) % 2) == 0) {
-                        this.plateau[i][j] = new Pion(false);
+                        this.plateau[j][i] = new Pion(false);
                 }
             }
         }
         for(int i=9 ; i>5; i-- ){
             for(int j=0 ; j < 10; j++ ){
                 if (((i+j) % 2) == 0) {
-                    this.plateau[i][j] = new Pion(true);
+                    this.plateau[j][i] = new Pion(true);
                 }
             }
         }
@@ -52,16 +52,19 @@ public class Echiquier {
     public boolean deplacementAutorise(int x1, int y1, int x2, int y2, boolean couleur) {
         //verifie que les coordonnées sont comprises entre 0 et 9
         if ( x1<0 || x1>9 || x2<0 || x2>9 || y1<0 || y1>9 || y2<0 || y2>9  ) {
+            System.out.println("hors du plateau");
             return false;
         }
         
         //vérifie si un pion est sur la case de départ et que  la case d'arrivé est vide
         if (this.plateau[x1][y1] == null || this.plateau[x2][y2] != null) {
+            System.out.println("pas de pion");
             return false;
         }
         
         //verifie la bonne couleur du pion à déplacer
         if ( this.plateau[x1][y1].isWhite() ^ couleur ){
+            System.out.println("mauvaise couleur");
             return false;
         }
         
@@ -69,10 +72,12 @@ public class Echiquier {
         if (!couleur) {
             //cas déplacement simple
             if (y2 == y1+1) {
+                System.out.println("deplacement simple");
                 return (1 == abs(x1-x2));   
             }
             //cas déplacement avec prise de pion
             if (y2 == y1+2) {
+                System.out.println("prise");
                 return (2==abs(x1-x2) && this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
             }
         }
@@ -81,13 +86,16 @@ public class Echiquier {
         if (couleur) {
             //cas déplacement simple
             if (y1 == y2+1) {
+                System.out.println("deplacement simple");
                 return (1 == abs(x1-x2));   
             }
             //cas déplacement avec prise de pion
             if (y1 == y2+2) {
+                System.out.println("prise");
                 return (2==abs(x1-x2) && !this.plateau[(x1+x2)/2][(y1+y2)/2].isWhite());
             }
-        }        
+        }     
+        System.out.println("autre");
         return false;
         
     }
@@ -116,14 +124,16 @@ public class Echiquier {
         }
         String line = bld.toString();
         System.out.println(line);
+        System.out.println("   0 1 2 3 4 5 6 7 8 9");
         
         
 
         for (int j = 0; j < hauteur; j++) {
             bld = new StringBuilder();
             for (int i = 0; i < largeur; i++) {
-                if (i == 0 || i == largeur) {
-                    bld.append("|");
+                if (i == 0) {
+                    bld.append(j);
+                    bld.append(" |");
                 }
                 
                 if(plateau[i][j] == null){
@@ -131,19 +141,21 @@ public class Echiquier {
                 }else{
                    if (plateau[i][j].isWhite()) {                    
                     bld.append("◎|");
+                    //bld.append("b|");
                     } else {
                         bld.append("◉|");
+                        //bld.append("n|");
                     } 
                 }
                 
             }
+            
             line = bld.toString();
             System.out.println(line);
-            
+            /*
             bld = new StringBuilder();
             for (int i = 0; i < largeur * 3 + 1; i++) {
                 if (j == hauteur - 1) {
-                    line = line + "=";
                     bld.append("=");
                 } else {
                     bld.append("-");
@@ -151,6 +163,7 @@ public class Echiquier {
             }
             line = bld.toString();
             System.out.println(line);
+            */
         }
     }
 }
