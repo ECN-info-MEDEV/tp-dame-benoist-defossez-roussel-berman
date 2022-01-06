@@ -107,43 +107,50 @@ public class Echiquier {
         }
 
     public void affichePlateau() {
-        String line = "";
+        StringBuilder bld = new StringBuilder();
+
         int largeur = 10; // Plateau carré de 10 x 10
         int hauteur = 10;
         for (int i = 0; i < largeur * 3 + 1; i++) {
-            line = line + "=";
+            bld.append("=");
         }
+        String line = bld.toString();
         System.out.println(line);
-        line = "";
+        
+        
 
         for (int j = 0; j < hauteur; j++) {
+            bld = new StringBuilder();
             for (int i = 0; i < largeur; i++) {
                 if (i == 0 || i == largeur) {
-                    line = line + "|";
+                    bld.append("|");
                 }
                 
                 if(plateau[i][j] == null){
-                    line = line + "" + " " + "|";
+                    bld.append(" |");
                 }else{
-                   if (plateau[i][j].isWhite()) {
-                    line = line + "" + "◎" + "|";
+                   if (plateau[i][j].isWhite()) {                    
+                    bld.append("◎|");
                     } else {
-                        line = line + "" + "◉" + "|";
+                        bld.append("◉|");
                     } 
                 }
                 
             }
+            line = bld.toString();
             System.out.println(line);
-            line = "";
+            
+            bld = new StringBuilder();
             for (int i = 0; i < largeur * 3 + 1; i++) {
                 if (j == hauteur - 1) {
                     line = line + "=";
+                    bld.append("=");
                 } else {
-                    line = line + "-";
+                    bld.append("-");
                 }
             }
+            line = bld.toString();
             System.out.println(line);
-            line = "";
         }
     }
 }
