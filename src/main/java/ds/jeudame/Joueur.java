@@ -44,15 +44,19 @@ public class Joueur {
     }
     public boolean tourDeJeu(Echiquier echiquier){
         boolean pionEaten ;
-        int xNew = 0 ;
-        int yNew = 0;
-        System.out.println(entree  + " Quel pion souhaites-tu bouger (x) ?  :");
-        int xCurrent = scanner.nextInt();
-        System.out.println(entree  + " Quel pion souhaites-tu bouger (y) ? :");
-        int yCurrent = scanner.nextInt();
+        int xNew=0;
+        int yNew=0;
+        int xCurrent=0;
+        int yCurrent=0;
+        
+        
         
         boolean positionAccepted = false;
         while(!positionAccepted){
+            System.out.println(entree  + " Quel pion souhaites-tu bouger (x) ?  :");
+            xCurrent = scanner.nextInt();
+            System.out.println(entree  + " Quel pion souhaites-tu bouger (y) ? :");
+            yCurrent = scanner.nextInt();
             System.out.println(entree  + " Où souhaites-tu aller (x) ? :");
             xNew = scanner.nextInt();
             System.out.println(entree  + " Où souhaites-tu aller (y) ?");
