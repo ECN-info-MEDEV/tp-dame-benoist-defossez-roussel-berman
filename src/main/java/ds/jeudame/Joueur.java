@@ -35,14 +35,13 @@ public class Joueur {
     }
 
     public Joueur(boolean isWhite) {
-        scanner = new Scanner(System.in);
-        System.out.println(entree + " Tapez votre pseudo :");
-        String nomJoueur = scanner.next();
-        this.nom = nomJoueur;
         this.nbrPion = 20;
         this.isWhite = isWhite;
     }
     public boolean tourDeJeu(Echiquier echiquier){
+        scanner = new Scanner(System.in);
+        
+        
         boolean pionEaten ;
         int xNew=0;
         int yNew=0;
@@ -71,4 +70,10 @@ public class Joueur {
         
         return pionEaten;
     }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
+    
 }
