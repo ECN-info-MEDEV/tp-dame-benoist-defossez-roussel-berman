@@ -33,6 +33,7 @@ public class Main {
                 }
             }
             else{
+                echiquier.affichePlateau();
                 manger=joueur2.tourDeJeu(echiquier);
                 n=0;
                 if (manger==true){

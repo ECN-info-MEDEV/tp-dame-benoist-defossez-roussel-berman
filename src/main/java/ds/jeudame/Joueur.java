@@ -57,6 +57,9 @@ public class Joueur {
             System.out.println("[ENTRÉE]"  + " Où souhaites-tu aller (y) ?");
             yNew = scanner.nextInt();
             positionAccepted = echiquier.deplacementAutorise(xCurrent, yCurrent, xNew, yNew, isWhite);
+            if(!positionAccepted){
+                System.out.println("erreur, à refaire");
+            }
         }
        
         pionEaten = echiquier.deplacerPion(xCurrent, yCurrent, xNew, yNew);
