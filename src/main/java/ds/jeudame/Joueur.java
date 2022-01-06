@@ -16,6 +16,7 @@ public class Joueur {
     private int nbrPion;
     private Scanner scanner; 
     private boolean isWhite;
+    private static String entree="[ENTRÉE]";
 
     public int getNbrPion() {
         return nbrPion;
@@ -35,26 +36,26 @@ public class Joueur {
 
     public Joueur(boolean isWhite) {
         scanner = new Scanner(System.in);
-        System.out.println("[ENTRÉE]" + " Tapez votre pseudo :");
+        System.out.println(entree + " Tapez votre pseudo :");
         String nomJoueur = scanner.next();
         this.nom = nomJoueur;
         this.nbrPion = 20;
         this.isWhite = isWhite;
     }
     public boolean tourDeJeu(Echiquier echiquier){
-        boolean pionEaten ; 
+        boolean pionEaten ;
         int xNew = 0 ;
         int yNew = 0;
-        System.out.println("[ENTRÉE]"  + " Quel pion souhaites-tu bouger (x) ?  :");
+        System.out.println(entree  + " Quel pion souhaites-tu bouger (x) ?  :");
         int xCurrent = scanner.nextInt();
-        System.out.println("[ENTRÉE]"  + " Quel pion souhaites-tu bouger (y) ? :");
+        System.out.println(entree  + " Quel pion souhaites-tu bouger (y) ? :");
         int yCurrent = scanner.nextInt();
         
         boolean positionAccepted = false;
         while(!positionAccepted){
-            System.out.println("[ENTRÉE]"  + " Où souhaites-tu aller (x) ? :");
+            System.out.println(entree  + " Où souhaites-tu aller (x) ? :");
             xNew = scanner.nextInt();
-            System.out.println("[ENTRÉE]"  + " Où souhaites-tu aller (y) ?");
+            System.out.println(entree  + " Où souhaites-tu aller (y) ?");
             yNew = scanner.nextInt();
             positionAccepted = echiquier.deplacementAutorise(xCurrent, yCurrent, xNew, yNew, isWhite);
             if(!positionAccepted){

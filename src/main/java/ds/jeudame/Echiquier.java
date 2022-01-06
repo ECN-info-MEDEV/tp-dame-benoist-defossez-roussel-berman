@@ -122,7 +122,7 @@ public class Echiquier {
         for (int j = 0; j < hauteur; j++) {
             bld = new StringBuilder();
             for (int i = 0; i < largeur; i++) {
-                if (i == 0 || i == largeur) {
+                if (i == 0) {
                     bld.append("|");
                 }
                 
@@ -143,7 +143,6 @@ public class Echiquier {
             bld = new StringBuilder();
             for (int i = 0; i < largeur * 3 + 1; i++) {
                 if (j == hauteur - 1) {
-                    line = line + "=";
                     bld.append("=");
                 } else {
                     bld.append("-");

@@ -27,8 +27,7 @@ public class Main {
             if(n%2==0){
                 manger=joueur1.tourDeJeu(echiquier);
                 n=1;
-                if (manger==true){
-                    manger=false;
+                if (manger){
                     joueur2.setNbrPion(joueur2.getNbrPion()-1);
                 }
             }
@@ -36,12 +35,9 @@ public class Main {
                 echiquier.affichePlateau();
                 manger=joueur2.tourDeJeu(echiquier);
                 n=0;
-                if (manger==true){
-                    manger=false;
+                if (manger){
                     joueur1.setNbrPion(joueur1.getNbrPion()-1);
                 }
-
-                //n=n%2+1;
                 if(joueur1.getNbrPion()==0){
                     System.out.println(joueur2.getNom()+" a gagné!!");
                     victoire = true;
