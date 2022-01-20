@@ -1,28 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="tp-dame-benoist-defossez-roussel-berman" default="javadoc" basedir=".">
+<project name="tp-dame-benoist-defossez-roussel-berman" default="build" basedir=".">
     <description>This is a simple test project.</description>
-    <target name="checkDependencies" description="Check if dependencies are satisfied">
-        <property name="src.location" location="src"/>
-        <property name="classes.location" location="build/classes"/>
-        <echo message="Source directory is ${src.location}"/>
-        <echo message="Classes directory is ${classes.location}"/>
-        <condition property="src.available">
-            <and>
-                <available file="${src.location}" type="dir"/>
-                <available file="${classes.location}" type="dir"/>
-            </and>
-        </condition>
+
+    <property name="main.build.dir" value="build/main"/>
+    <property name="main.src.dir" value="src/main/java"/>
+    <property name="test.build.dir" value="build/test"/>
+    <property name="test.src.dir" value="src/test/java"/>
+
+    <path id="classpath.test">
+        <pathelement location="lib/junit-4.13.2.jar"/>
+        <pathelement location="lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${main.build.dir}"/>
+    </path>
+
+    <target name="build" description="Build the application" depends="clean, javadoc, compile, test">
+        <echo message="Build finished"/>
+
     </target>
-    <target name="build" description="Build the application" depends="checkDependencies" if="src.available">
-        <echo message="Building application..."/>
-        <javac srcdir="${src.location}" destdir="${classes.location}" includeAntRuntime="false"/>
-        <echo message="Done!"/>
-    </target>
+
     <target name="javadoc">
-        <javadoc sourcepath="src" destdir="target/site">
+        <javadoc sourcepath="src" destdir="doc">
             <fileset dir="src" defaultexcludes="yes">
                 <include name="**" />
             </fileset>
+            <classpath refid="classpath.test"/>
         </javadoc>
+    </target>
+
+    <target name="clean">
+        <echo message="build folder deleted"/>
+        <delete dir="build"/>
+        <delete dir="doc"/>
+    </target>
+
+    <target name="compile">
+        <echo message="compile src/main in build folder"/>
+        <mkdir dir="${main.build.dir}"/>
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false"/>
+    </target>
+
+    <target name="test-compile">
+        <echo message="compile src/test in build folder"/>
+        <mkdir dir="${test.build.dir}"/>
+        <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+            <classpath refid="classpath.test"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="test-compile">
+        <junit printsummary="on" haltonfailure="yes" fork="true">
+            <classpath>
+                <path refid="classpath.test"/>
+                <pathelement location="${test.build.dir}"/>
+            </classpath>
+            <formatter type="brief" usefile="false" />
+            <batchtest>
+                <fileset dir="${test.src.dir}" includes="**/*Test.java" />
+            </batchtest>
+        </junit>
     </target>
 </project>
