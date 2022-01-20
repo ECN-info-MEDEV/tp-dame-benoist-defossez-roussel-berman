@@ -6,6 +6,7 @@
     <property name="main.src.dir" value="src/main/java"/>
     <property name="test.build.dir" value="build/test"/>
     <property name="test.src.dir" value="src/test/java"/>
+    <property name="build.lib.dir" value="dist/lib"/>
 
     <path id="classpath.test">
         <pathelement location="lib/junit-4.13.2.jar"/>
@@ -14,6 +15,12 @@
     </path>
 
     <target name="build" description="Build the application" depends="clean, javadoc, compile, test">
+        <mkdir dir="${build.lib.dir}"/>
+        <jar destfile="${build.lib.dir}/app.jar" basedir="build/main">
+            <manifest>
+                <attribute name="Main-Class" value="ds.jeudame.Main" />
+            </manifest>
+        </jar>
         <echo message="Build finished"/>
 
     </target>
@@ -28,9 +35,10 @@
     </target>
 
     <target name="clean">
-        <echo message="build folder deleted"/>
+        <echo message="build and doc folder deleted"/>
         <delete dir="build"/>
         <delete dir="doc"/>
+        <delete dir="dist"/>
     </target>
 
     <target name="compile">
