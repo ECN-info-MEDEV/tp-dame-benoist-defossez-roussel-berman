@@ -23,8 +23,8 @@
 hs_err_pid*
 /target/
 /nbproject/
-/build/
 /dist/
 /doc/
+/build/
 .DS_Store
 **/.DS_Store
