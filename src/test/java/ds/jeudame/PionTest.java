@@ -14,14 +14,14 @@ import static org.junit.Assert.*;
  * @author aberman
  */
 public class PionTest {
-    
+
     public PionTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
@@ -35,7 +35,7 @@ public class PionTest {
         assertEquals(instance.isWhite(), true);
 
     }
-    
+
     /**
      * Test of setWhite method, of class Pion.
      */
@@ -46,5 +46,5 @@ public class PionTest {
         assertEquals(instance.isWhite(), false);
 
     }
-    
+
 }

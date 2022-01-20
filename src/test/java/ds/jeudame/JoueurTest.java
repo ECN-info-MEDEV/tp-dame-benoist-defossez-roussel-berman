@@ -14,14 +14,14 @@ import static org.junit.Assert.*;
  * @author aberman
  */
 public class JoueurTest {
-    
+
     public JoueurTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
